@@ -1,0 +1,80 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<form method="POST" autocomplete="off">
+    {% csrf_token %}
+
+    <label for="provider">:~ provider$</label>
+    <select id="provider" name="provider">
+        <option value="...">...</option>
+        {% for provider in providers %}
+            <option value="{{ provider }}">{{ provider }}</option>
+        {% endfor %}
+    </select><br>
+
+    {% for provider, field_list in fields.items %}
+        {% for field in field_list %}
+            <div class="provider-section" id="{{ provider }}">
+                {% if not field.values %}
+                    <label for="{{ field }}">:~ {{ field }}$</label>
+                    <input type="text" class="input-cursor" id="{{ field }}" name="{{ field }}" placeholder="_">
+                {% else %}
+                    {% for key, value in field.items %}
+                        <label for="{{ key }}">:~ {{ key }}$</label>
+                        <select id="{{ key }}" name="{{ key }}">
+                            {% for elem in value %}
+                                <option value="{{ elem }}">{{ elem }}</option>
+                            {% endfor %}
+                        </select>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <input id="stock-form-submit" type="submit" value="Submit">
+</form><br>
+
+<table class="table table-hover">
+    <h3 style="font-size: 20px">mysql> SELECT * FROM History;</h3>
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Url</th>
+        <th scope="col">Params</th>
+        <th scope="col">Created by</th>
+        <th scope="col">Created on</th>
+        <th scope="col">Updated by</th>
+        <th scope="col">Updated on</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    {% for field in history_table %}
+        <tbody>
+        <tr>
+            <td>{{ field.name }}</td>
+            <td>{{ field.type }}</td>
+            <td>{{ field.url }}</td>
+            <td>{{ field.params }}</td>
+            <td>{{ field.created_by }}</td>
+            <td>{{ field.created_on }}</td>
+            <td>{{ field.updated_by }}</td>
+            <td>{{ field.updated_on }}</td>
+            <td>
+                <form method="POST" action="{% url 'data_delete' field.id %}" onsubmit="alert('Remove selected row?')">
+                    {% csrf_token %}
+                    <button type="submit" style="border: none; background:none">
+                        <ion-icon id="trash-outline" name="trash-outline"></ion-icon>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
+
+{% endblock content %}

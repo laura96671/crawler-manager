@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Homepage{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/crawler_homepage.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
+    <script src="{% static 'js/crawler_homepage.js' %}" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"/>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav style="padding: 10px 10px 0 10px; width: 100%;">
+            <div class="typing-container">
+                <span id="sentence" class="sentence"></span>
+                <span class="input-cursor"></span>
+            </div>
+        </nav>
+    </header>
+    <div class="container page-content" id="">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <footer style="position: fixed; padding: 10px 10px 0 10px; bottom: 0; width: 100%">
+        <p>Copyright © 2022 <b>The Quant Army</b>. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
