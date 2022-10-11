@@ -8,7 +8,7 @@ git clone https://github.com/laura96671/crawler-manager.git
 ```
 To start:
 ```
-docker-composee build
+docker-compose build
 docker-compose up -d
 ```
 
