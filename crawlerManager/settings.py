@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!gk=9^7(twhiq3r9t7sg(%4v-^rkew)i@2ri*=pzzo#ch3dew9'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'crawlerManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tqa',
-        'USER': 'root',
-        'PASSWORD': 'password',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': "host.docker.internal",
-        'PORT': 3306
+        'PORT': os.environ.get('DB_PORT')
     }
 }
 
